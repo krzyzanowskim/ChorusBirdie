@@ -14,6 +14,7 @@ class GameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         self.physicsWorld.gravity = CGVectorMake(0.0, -0.9)
+        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
 
         self.addChild(birdNode)
         birdNode.physicsBody?.applyImpulse(CGVectorMake(5.0, 0.0))
