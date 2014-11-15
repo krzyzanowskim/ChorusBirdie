@@ -17,6 +17,7 @@ class GameScene: SKScene {
         self.physicsWorld.gravity = CGVectorMake(0.0, -0.9)
         self.addChild(helloNode)
         helloNode.physicsBody?.applyImpulse(CGVectorMake(5.0, 0.0))
+        helloNode.startAnimatingWings()
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
