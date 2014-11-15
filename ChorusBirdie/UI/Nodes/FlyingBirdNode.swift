@@ -12,17 +12,62 @@ import SpriteKit
 
 class FlyingBirdNode : SKSpriteNode {
     
-    var topWing: SKSpriteNode = {
-        let node = SKSpriteNode(imageNamed: "flying-bird-wing-up")
-        node.anchorPoint = CGPointMake(0, 0)
-        return node
-    }()
+    enum ModeEnum {
+        case Flying, Sitting
+        
+        var leftWing:SKSpriteNode {
+            get {
+                let node = SKSpriteNode(texture: SKTexture(imageNamed: leftWingImageName))
+                node.anchorPoint = CGPointMake(0, 0)
+                return node
+            }
+        }
+        
+        var righWing:SKSpriteNode {
+            get {
+                let node = SKSpriteNode(texture: SKTexture(imageNamed: rightWingImageName))
+                node.anchorPoint = CGPointMake(1, 1)
+                return node
+            }
+        }
+        
+        private var bodyImageName:String {
+            switch (self) {
+            case .Flying:
+                return "flying-bird-body"
+            case .Sitting:
+                return "sitting-bird-body"
+            }
+        }
+        
+        private var leftWingImageName:String {
+            switch (self) {
+            case .Flying:
+                return "flying-bird-wing-up"
+            case .Sitting:
+                return "sitting-bird-wing-up"
+            }
+        }
+
+        private var rightWingImageName:String {
+            switch (self) {
+            case .Flying:
+                return "flying-bird-wing-down"
+            case .Sitting:
+                return "sitting-bird-wing-down"
+            }
+        }
+
+    }
     
-    var bottomWing: SKSpriteNode = {
-        let node = SKSpriteNode(imageNamed: "flying-bird-wing-down")
-        node.anchorPoint = CGPointMake(1, 1)
-        return node
-    }()
+    var mode:ModeEnum = .Flying {
+        didSet {
+            self.texture = SKTexture(imageNamed: mode.bodyImageName)
+        }
+    }
+    
+    var leftWing: SKSpriteNode
+    var rightWing: SKSpriteNode
     
     class func bird(position: CGPoint = CGPoint(x:400,y:400)) -> FlyingBirdNode {
         let node = FlyingBirdNode()
@@ -36,15 +81,31 @@ class FlyingBirdNode : SKSpriteNode {
         
         return node
     }
+    
+    override init(texture: SKTexture!, color: UIColor!, size: CGSize) {
+        leftWing = mode.leftWing
+        rightWing = mode.righWing
+        super.init(texture: texture, color: color, size: size)
+    }
    
     override init() {
-        let birdTexture = SKTexture(imageNamed: "flying-bird-body")
-        super.init(texture: birdTexture, color: UIColor.whiteColor(), size: birdTexture.size())
-        self.addChild(topWing)
-        self.addChild(bottomWing)
+        leftWing = mode.leftWing
+        rightWing = mode.righWing
+        
+        super.init()
+        
+        self.color = UIColor.whiteColor()
+        self.texture = SKTexture(imageNamed: "flying-bird-body")
+        if let size = self.texture?.size() {
+            self.size = size
+        }
+        self.addChild(leftWing)
+        self.addChild(rightWing)
     }
 
     required init?(coder aDecoder: NSCoder) {
+        leftWing = mode.leftWing
+        rightWing = mode.righWing
         super.init(coder: aDecoder)
     }
     
@@ -54,13 +115,14 @@ class FlyingBirdNode : SKSpriteNode {
         let topSequence = SKAction.sequence([toTheRight, toTheLeft])
         let bottomSequence = SKAction.sequence([toTheLeft, toTheRight])
         
-        self.topWing.runAction(SKAction.repeatActionForever(topSequence))
-        self.bottomWing.runAction(SKAction.repeatActionForever(bottomSequence))
+        
+        leftWing.runAction(SKAction.repeatActionForever(topSequence))
+        rightWing.runAction(SKAction.repeatActionForever(bottomSequence))
     }
     
     func stopAnimatingWings() {
-        self.topWing.removeAllActions()
-        self.bottomWing.removeAllActions()
+        leftWing.removeAllActions()
+        rightWing.removeAllActions()
     }
     
 }

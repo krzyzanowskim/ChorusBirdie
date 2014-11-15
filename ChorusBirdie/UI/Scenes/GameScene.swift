@@ -25,6 +25,7 @@ class GameScene: SKScene {
         /* Called when a touch begins */
         birdNode.physicsBody?.applyImpulse(CGVectorMake(0.5, 10.0))
         
+        birdNode.mode = .Sitting
     }
    
     override func update(currentTime: CFTimeInterval) {

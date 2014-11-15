@@ -15,7 +15,6 @@
 		319A41141A175F86005F33FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 319A41121A175F86005F33FC /* Main.storyboard */; };
 		319A41161A175F86005F33FC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 319A41151A175F86005F33FC /* Images.xcassets */; };
 		319A41191A175F86005F33FC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 319A41171A175F86005F33FC /* LaunchScreen.xib */; };
-		75BE7DB61A17853300DBEE48 /* SittingBirdNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BE7DB51A17853300DBEE48 /* SittingBirdNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +28,6 @@
 		319A41131A175F86005F33FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		319A41151A175F86005F33FC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		319A41181A175F86005F33FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		75BE7DB51A17853300DBEE48 /* SittingBirdNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SittingBirdNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +45,6 @@
 			isa = PBXGroup;
 			children = (
 				1D8AE6451A177C97008EED59 /* FlyingBirdNode.swift */,
-				75BE7DB51A17853300DBEE48 /* SittingBirdNode.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -205,7 +202,6 @@
 			files = (
 				1D8AE6461A177C97008EED59 /* FlyingBirdNode.swift in Sources */,
 				319A410F1A175F86005F33FC /* GameScene.swift in Sources */,
-				75BE7DB61A17853300DBEE48 /* SittingBirdNode.swift in Sources */,
 				319A41111A175F86005F33FC /* GameViewController.swift in Sources */,
 				319A410B1A175F86005F33FC /* AppDelegate.swift in Sources */,
 			);
