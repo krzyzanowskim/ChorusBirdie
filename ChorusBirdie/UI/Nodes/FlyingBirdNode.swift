@@ -11,8 +11,9 @@ import SpriteKit
 
 
 class FlyingBirdNode : SKSpriteNode {
-    class func bird() -> FlyingBirdNode {
+    class func bird(position: CGPoint = CGPoint(x:400,y:400)) -> FlyingBirdNode {
         let node = FlyingBirdNode()
+        node.position = position
         
         if let texture = node.texture {
             node.physicsBody = SKPhysicsBody(texture: node.texture, size: node.size)
