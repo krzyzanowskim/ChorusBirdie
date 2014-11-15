@@ -97,13 +97,18 @@ class FlyingBirdNode : SKEffectNode {
         didSet {
             self.setupSprites()
             
-            if mode == .Landing {
+            switch (mode) {
+            case .Landing, .Sitting:
                 self.childNodeWithName("leftWing")?.zRotation = CGFloat(M_PI) / 2
                 self.childNodeWithName("rightWing")?.zRotation = CGFloat(M_PI) / 2
-            } else {
+                break;
+            case .Flying:
                 self.childNodeWithName("leftWing")?.zRotation = 0
                 self.childNodeWithName("rightWing")?.zRotation = 0
+                break;
             }
+            
+            self.shouldEnableEffects = mode == .Sitting
             
             if animated {
                 self.startAnimatingWings()
@@ -150,9 +155,14 @@ class FlyingBirdNode : SKEffectNode {
         return node
     }
     
+    var greyFilter:CIFilter {
+        return CIFilter(name: "CIColorControls", withInputParameters: ["inputBrightness": 0.0, "inputSaturation":0.0])
+    }
+    
     override init() {
         super.init()
-        
+        self.shouldEnableEffects = false
+        self.filter = greyFilter
         self.setupSprites()
     }
 
