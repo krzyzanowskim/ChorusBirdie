@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 
-class FlyingBirdNode : SKSpriteNode {
+class FlyingBirdNode : SKEffectNode {
     
     enum ModeEnum {
         case Flying, Landing, Sitting
@@ -29,6 +29,19 @@ class FlyingBirdNode : SKSpriteNode {
                 let node = SKSpriteNode(texture: SKTexture(imageNamed: rightWingImageName))
                 node.name = "rightWing"
                 node.anchorPoint = rightWingAnchorPoint
+                return node
+            }
+        }
+        
+        var body:SKSpriteNode {
+            get {
+                let node = SKSpriteNode(texture: SKTexture(imageNamed: bodyImageName))
+                node.name = "body"
+                node.color = UIColor.whiteColor()
+                if let size = node.texture?.size() {
+                    node.size = size
+                }
+                
                 return node
             }
         }
@@ -82,12 +95,7 @@ class FlyingBirdNode : SKSpriteNode {
     
     var mode:ModeEnum = .Flying {
         didSet {
-            self.texture = SKTexture(imageNamed: mode.bodyImageName)
-            if let size = self.texture?.size() {
-                self.size = size
-            }
-            
-            self.setupWings()
+            self.setupSprites()
             
             if mode == .Landing {
                 self.childNodeWithName("leftWing")?.zRotation = CGFloat(M_PI) / 2
@@ -131,38 +139,31 @@ class FlyingBirdNode : SKSpriteNode {
     class func bird(position: CGPoint = CGPoint(x:400,y:400)) -> FlyingBirdNode {
         let node = FlyingBirdNode()
         node.position = position
-        
-        if let texture = node.texture {
-            node.physicsBody = SKPhysicsBody(texture: node.texture, size: node.size)
+        let bodyNode = node.mode.body
+
+        if let texture = bodyNode.texture {
+            node.physicsBody = SKPhysicsBody(texture: bodyNode.texture, size: bodyNode.size)
             node.physicsBody?.dynamic = true
             node.physicsBody?.mass = 0.1
             node.physicsBody?.allowsRotation = false
         }
-        
         return node
     }
     
-    override init(texture: SKTexture!, color: UIColor!, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-    }
-   
     override init() {
         super.init()
         
-        self.color = UIColor.whiteColor()
-        self.texture = SKTexture(imageNamed: mode.bodyImageName)
-        if let size = self.texture?.size() {
-            self.size = size
-        }
-        self.setupWings()
+        self.setupSprites()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    func setupWings() {
+    
+    func setupSprites() {
         self.removeAllChildren()
+        self.addChild(mode.body)
         self.addChild(mode.leftWing)
         self.addChild(mode.righWing)
     }
