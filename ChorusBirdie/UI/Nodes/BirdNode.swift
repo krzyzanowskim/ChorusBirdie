@@ -17,7 +17,7 @@ class BirdNode : SKSpriteNode {
         if let texture = node.texture {
             node.physicsBody = SKPhysicsBody(texture: node.texture, size: node.size)
             node.physicsBody?.dynamic = true
-            node.physicsBody?.mass = 0.2
+            node.physicsBody?.mass = 0.1
         }
         
         return node

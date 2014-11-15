@@ -16,12 +16,12 @@ class GameScene: SKScene {
         helloNode.position = CGPointMake(400, 400)
         self.physicsWorld.gravity = CGVectorMake(0.0, -0.9)
         self.addChild(helloNode)
-        helloNode.physicsBody?.applyForce(CGVectorMake(50.0, 0.0))
+        helloNode.physicsBody?.applyImpulse(CGVectorMake(5.0, 0.0))
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         /* Called when a touch begins */
-        helloNode.physicsBody?.applyImpulse(CGVectorMake(0.0, 20.0))
+        helloNode.physicsBody?.applyImpulse(CGVectorMake(0.5, 10.0))
         
     }
    
