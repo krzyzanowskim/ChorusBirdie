@@ -10,7 +10,7 @@ import SpriteKit
 
 class GameScene: SKScene {
     
-    let helloNode = BirdNode.bird()
+    let helloNode = FlyingBirdNode.bird()
     
     override func didMoveToView(view: SKView) {
         helloNode.position = CGPointMake(400, 400)

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D8AE6461A177C97008EED59 /* BirdNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8AE6451A177C97008EED59 /* BirdNode.swift */; };
+		1D8AE6461A177C97008EED59 /* FlyingBirdNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8AE6451A177C97008EED59 /* FlyingBirdNode.swift */; };
 		319A410B1A175F86005F33FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319A410A1A175F86005F33FC /* AppDelegate.swift */; };
 		319A410D1A175F86005F33FC /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 319A410C1A175F86005F33FC /* GameScene.sks */; };
 		319A410F1A175F86005F33FC /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319A410E1A175F86005F33FC /* GameScene.swift */; };
@@ -18,12 +18,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1D8AE6451A177C97008EED59 /* BirdNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirdNode.swift; sourceTree = "<group>"; };
+		1D8AE6451A177C97008EED59 /* FlyingBirdNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FlyingBirdNode.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		319A41051A175F86005F33FC /* ChorusBirdie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChorusBirdie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		319A41091A175F86005F33FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		319A410A1A175F86005F33FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		319A410C1A175F86005F33FC /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		319A410E1A175F86005F33FC /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		319A410E1A175F86005F33FC /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = GameScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		319A41101A175F86005F33FC /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		319A41131A175F86005F33FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		319A41151A175F86005F33FC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -44,7 +44,7 @@
 		1D8AE6441A177C71008EED59 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
-				1D8AE6451A177C97008EED59 /* BirdNode.swift */,
+				1D8AE6451A177C97008EED59 /* FlyingBirdNode.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -200,7 +200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D8AE6461A177C97008EED59 /* BirdNode.swift in Sources */,
+				1D8AE6461A177C97008EED59 /* FlyingBirdNode.swift in Sources */,
 				319A410F1A175F86005F33FC /* GameScene.swift in Sources */,
 				319A41111A175F86005F33FC /* GameViewController.swift in Sources */,
 				319A410B1A175F86005F33FC /* AppDelegate.swift in Sources */,
