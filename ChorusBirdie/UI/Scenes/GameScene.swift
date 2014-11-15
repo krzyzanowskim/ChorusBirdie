@@ -30,12 +30,11 @@ class GameScene: SKScene {
         self.physicsWorld.gravity = CGVectorMake(0.0, -0.9)
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         self.setupCables()
+        self.buildInitialScene();
 
         self.addChild(birdNode)
         birdNode.physicsBody?.applyImpulse(CGVectorMake(5.0, 0.0))
-        birdNode.animated = true
-        
-        self.addChild(self.button)
+        birdNode.animated = true        
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
@@ -63,14 +62,10 @@ class GameScene: SKScene {
         cable2.position = CGPointMake(self.size.width / 2, 200);
         cable3.position = CGPointMake(self.size.width / 2, 120);
         cable4.position = CGPointMake(self.size.width / 2, 50);
-
-        self.addChild(cable1)
-        self.addChild(cable2)
-        self.addChild(cable3)
-        self.addChild(cable4)
         
-        let cable1texture = SKTexture(imageNamed: "cable1")
-        cable1.physicsBody = SKPhysicsBody(texture: cable1texture, size: cable1texture.size())
+        if let size = cable1.texture?.size() {
+            cable1.physicsBody = SKPhysicsBody(texture: cable1.texture, size: size)
+        }
         cable1.physicsBody?.dynamic = false
         
         let cable2texture = SKTexture(imageNamed: "cable2")
@@ -84,5 +79,10 @@ class GameScene: SKScene {
         let cable4texture = SKTexture(imageNamed: "cable4")
         cable4.physicsBody = SKPhysicsBody(texture: cable4texture, size: cable4texture.size())
         cable4.physicsBody?.dynamic = false
+        
+        self.addChild(cable1)
+        self.addChild(cable2)
+        self.addChild(cable3)
+        self.addChild(cable4)
     }
 }

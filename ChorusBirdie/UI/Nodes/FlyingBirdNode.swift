@@ -35,6 +35,10 @@ class FlyingBirdNode : SKEffectNode {
         }
     }
     
+    var greyFilter:CIFilter {
+        return CIFilter(name: "CIColorControls", withInputParameters: ["inputBrightness": 0.0, "inputSaturation":0.0])
+    }
+    
     var animated:Bool = false {
         didSet {
             if animated {
@@ -60,9 +64,10 @@ class FlyingBirdNode : SKEffectNode {
         self.childNodeWithName("rightWing")?.removeAllActions()
     }
     
-    class func bird(position: CGPoint = CGPoint(x:400,y:400)) -> FlyingBirdNode {
+    class func bird(mode: ModeEnum = .Flying, position: CGPoint = CGPoint(x:400,y:400)) -> FlyingBirdNode {
         let node = FlyingBirdNode()
         node.position = position
+        node.mode    = mode
         let bodyNode = node.mode.body
 
         if let texture = bodyNode.texture {
@@ -72,10 +77,6 @@ class FlyingBirdNode : SKEffectNode {
             node.physicsBody?.allowsRotation = false
         }
         return node
-    }
-    
-    var greyFilter:CIFilter {
-        return CIFilter(name: "CIColorControls", withInputParameters: ["inputBrightness": 0.0, "inputSaturation":0.0])
     }
     
     override init() {
@@ -88,7 +89,6 @@ class FlyingBirdNode : SKEffectNode {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
     
     func setupSprites() {
         self.removeAllChildren()
