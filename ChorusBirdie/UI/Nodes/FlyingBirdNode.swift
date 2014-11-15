@@ -13,7 +13,7 @@ import SpriteKit
 class FlyingBirdNode : SKSpriteNode {
     
     enum ModeEnum {
-        case Flying, Sitting
+        case Flying, Landing, Sitting
         
         var leftWing:SKSpriteNode {
             get {
@@ -37,7 +37,7 @@ class FlyingBirdNode : SKSpriteNode {
             switch (self) {
             case .Flying:
                 return CGPointMake(0, 0)
-            case .Sitting:
+            case .Landing, .Sitting:
                 return CGPointMake(1, 1)
             }
         }
@@ -46,7 +46,7 @@ class FlyingBirdNode : SKSpriteNode {
             switch (self) {
             case .Flying:
                 return CGPointMake(1, 1)
-            case .Sitting:
+            case .Landing, .Sitting:
                 return CGPointMake(1, 0)
             }
         }
@@ -55,7 +55,7 @@ class FlyingBirdNode : SKSpriteNode {
             switch (self) {
             case .Flying:
                 return "flying-bird-body"
-            case .Sitting:
+            case .Landing, .Sitting:
                 return "sitting-bird-body"
             }
         }
@@ -64,7 +64,7 @@ class FlyingBirdNode : SKSpriteNode {
             switch (self) {
             case .Flying:
                 return "flying-bird-wing-left"
-            case .Sitting:
+            case .Landing, .Sitting:
                 return "sitting-bird-wing-left"
             }
         }
@@ -73,7 +73,7 @@ class FlyingBirdNode : SKSpriteNode {
             switch (self) {
             case .Flying:
                 return "flying-bird-wing-right"
-            case .Sitting:
+            case .Landing, .Sitting:
                 return "sitting-bird-wing-right"
             }
         }
@@ -89,7 +89,7 @@ class FlyingBirdNode : SKSpriteNode {
             
             self.setupWings()
             
-            if mode == .Sitting {
+            if mode == .Landing {
                 self.childNodeWithName("leftWing")?.zRotation = CGFloat(M_PI) / 2
                 self.childNodeWithName("rightWing")?.zRotation = CGFloat(M_PI) / 2
             } else {

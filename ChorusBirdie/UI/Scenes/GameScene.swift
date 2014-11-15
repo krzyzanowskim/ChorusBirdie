@@ -25,10 +25,10 @@ class GameScene: SKScene {
         /* Called when a touch begins */
         birdNode.physicsBody?.applyImpulse(CGVectorMake(0.5, 10.0))
         
-        if birdNode.mode == .Sitting {
+        if birdNode.mode == .Landing {
             birdNode.mode = .Flying
         } else {
-            birdNode.mode = .Sitting
+            birdNode.mode = .Landing
         }
     }
    
