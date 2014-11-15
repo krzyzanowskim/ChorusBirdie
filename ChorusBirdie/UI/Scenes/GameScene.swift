@@ -10,16 +10,10 @@ import SpriteKit
 
 class GameScene: SKScene {
     
-    let helloNode: SKSpriteNode = {
-        var helloNode = SKSpriteNode(imageNamed: "flying-bird")
-        helloNode.position = CGPointMake(400, 400)
-        helloNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(100, 100))
-        helloNode.physicsBody?.dynamic = true
-        helloNode.physicsBody?.mass = 0.2
-        return helloNode
-    }()
+    let helloNode = BirdNode.bird()
     
     override func didMoveToView(view: SKView) {
+        helloNode.position = CGPointMake(400, 400)
         self.physicsWorld.gravity = CGVectorMake(0.0, -0.9)
         self.addChild(helloNode)
         helloNode.physicsBody?.applyForce(CGVectorMake(50.0, 0.0))
