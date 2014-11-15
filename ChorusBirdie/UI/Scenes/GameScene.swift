@@ -35,7 +35,7 @@ class GameScene: SKScene {
         self.buildInitialScene();
         self.addChild(button)
         
-        birdNode.physicsBody?.applyImpulse(CGVectorMake(5.0, 0.0))
+        birdNode.physicsBody?.applyImpulse(CGVectorMake(10.0, 0.0))
         birdNode.animated = true        
     }
     

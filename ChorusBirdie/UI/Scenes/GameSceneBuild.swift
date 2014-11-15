@@ -41,15 +41,19 @@ extension GameScene {
     }
     
     func buildInitialScene() {
-        for idx in stride(from: 100, through: 1000, by: 150) {
-            let sittingBird = FlyingBirdNode.bird(mode: .Sitting, position: CGPoint(x:idx, y:700));
-            if let body = self.physicsWorld.bodyAlongRayStart(sittingBird.position, end: CGPoint(x:sittingBird.position.x, y:0)) {
-                if let node = body.node {
-                    let size = node.calculateAccumulatedFrame()
-                    sittingBird.position = CGPoint(x:sittingBird.position.x, y:node.position.y + (size.height /* * node.yScale */ * 0.5));
+        for idx in stride(from: 150, through: self.scene!.size.width, by: 150) {
+            
+            let skip = arc4random_uniform(2) == 0
+            if (!skip) {
+                let sittingBird = FlyingBirdNode.bird(mode: .Sitting, position: CGPoint(x:idx, y:700));
+                if let body = self.physicsWorld.bodyAlongRayStart(sittingBird.position, end: CGPoint(x:sittingBird.position.x, y:0)) {
+                    if let node = body.node {
+                        let size = node.calculateAccumulatedFrame()
+                        sittingBird.position = CGPoint(x:sittingBird.position.x, y:node.position.y + size.height /* + (size.height * node.yScale * 0.5)*/);
+                    }
                 }
+                self.addChild(sittingBird)
             }
-            self.addChild(sittingBird)
         }
     }
 }
