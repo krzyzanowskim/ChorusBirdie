@@ -18,6 +18,7 @@ class FlyingBirdNode : SKSpriteNode {
         var leftWing:SKSpriteNode {
             get {
                 let node = SKSpriteNode(texture: SKTexture(imageNamed: leftWingImageName))
+                node.name = "leftWing"
                 node.anchorPoint = CGPointMake(0, 0)
                 return node
             }
@@ -26,6 +27,7 @@ class FlyingBirdNode : SKSpriteNode {
         var righWing:SKSpriteNode {
             get {
                 let node = SKSpriteNode(texture: SKTexture(imageNamed: rightWingImageName))
+                node.name = "rightWing"
                 node.anchorPoint = CGPointMake(1, 1)
                 return node
             }
@@ -66,9 +68,6 @@ class FlyingBirdNode : SKSpriteNode {
         }
     }
     
-    var leftWing: SKSpriteNode
-    var rightWing: SKSpriteNode
-    
     class func bird(position: CGPoint = CGPoint(x:400,y:400)) -> FlyingBirdNode {
         let node = FlyingBirdNode()
         node.position = position
@@ -83,15 +82,10 @@ class FlyingBirdNode : SKSpriteNode {
     }
     
     override init(texture: SKTexture!, color: UIColor!, size: CGSize) {
-        leftWing = mode.leftWing
-        rightWing = mode.righWing
         super.init(texture: texture, color: color, size: size)
     }
    
     override init() {
-        leftWing = mode.leftWing
-        rightWing = mode.righWing
-        
         super.init()
         
         self.color = UIColor.whiteColor()
@@ -99,13 +93,11 @@ class FlyingBirdNode : SKSpriteNode {
         if let size = self.texture?.size() {
             self.size = size
         }
-        self.addChild(leftWing)
-        self.addChild(rightWing)
+        self.addChild(mode.leftWing)
+        self.addChild(mode.righWing)
     }
 
     required init?(coder aDecoder: NSCoder) {
-        leftWing = mode.leftWing
-        rightWing = mode.righWing
         super.init(coder: aDecoder)
     }
     
@@ -115,14 +107,13 @@ class FlyingBirdNode : SKSpriteNode {
         let topSequence = SKAction.sequence([toTheRight, toTheLeft])
         let bottomSequence = SKAction.sequence([toTheLeft, toTheRight])
         
-        
-        leftWing.runAction(SKAction.repeatActionForever(topSequence))
-        rightWing.runAction(SKAction.repeatActionForever(bottomSequence))
+        self.childNodeWithName("leftWing")?.runAction(SKAction.repeatActionForever(topSequence))
+        self.childNodeWithName("rightWing")?.runAction(SKAction.repeatActionForever(bottomSequence))
     }
     
     func stopAnimatingWings() {
-        leftWing.removeAllActions()
-        rightWing.removeAllActions()
+        self.childNodeWithName("leftWing")?.removeAllActions()
+        self.childNodeWithName("rightWing")?.removeAllActions()
     }
     
 }
