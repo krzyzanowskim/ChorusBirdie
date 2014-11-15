@@ -16,6 +16,15 @@ class GameScene: SKScene {
     let cable3 = SKSpriteNode(imageNamed: "cable3")
     let cable4 = SKSpriteNode(imageNamed: "cable4")
 
+    var button:SKLabelNode {
+        let button = SKLabelNode(text: "LAND")
+        button.name = "button"
+        button.fontColor = UIColor.redColor()
+        button.fontSize = 80
+        button.position = CGPointMake(100, 100)
+        button.zPosition = 1.0;
+        return button
+    }
     
     override func didMoveToView(view: SKView) {
         self.physicsWorld.gravity = CGVectorMake(0.0, -0.9)
@@ -25,16 +34,23 @@ class GameScene: SKScene {
         self.addChild(birdNode)
         birdNode.physicsBody?.applyImpulse(CGVectorMake(5.0, 0.0))
         birdNode.animated = true
+        
+        self.addChild(self.button)
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         /* Called when a touch begins */
-        birdNode.physicsBody?.applyImpulse(CGVectorMake(0.5, 10.0))
         
-        if birdNode.mode == .Landing {
-            birdNode.mode = .Flying
-        } else {
-            birdNode.mode = .Landing
+        if let touch = touches.anyObject() as? UITouch {
+            let location = touch.locationInNode(self)
+            let node = self .nodeAtPoint(location)
+            
+            if node.name == "button" {
+                birdNode.mode = .Landing
+                node.removeFromParent()
+            } else {
+                birdNode.physicsBody?.applyImpulse(CGVectorMake(0.5, 10.0))
+            }
         }
     }
    
