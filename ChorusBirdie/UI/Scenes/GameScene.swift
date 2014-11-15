@@ -18,14 +18,18 @@ class GameScene: SKScene {
 
         self.addChild(birdNode)
         birdNode.physicsBody?.applyImpulse(CGVectorMake(5.0, 0.0))
-        birdNode.startAnimatingWings()
+        birdNode.animated = true
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         /* Called when a touch begins */
         birdNode.physicsBody?.applyImpulse(CGVectorMake(0.5, 10.0))
         
-        birdNode.mode = .Sitting
+        if birdNode.mode == .Sitting {
+            birdNode.mode = .Flying
+        } else {
+            birdNode.mode = .Sitting
+        }
     }
    
     override func update(currentTime: CFTimeInterval) {
