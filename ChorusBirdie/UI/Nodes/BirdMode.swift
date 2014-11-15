@@ -40,6 +40,7 @@ extension FlyingBirdNode {
                 if let size = node.texture?.size() {
                     node.size = size
                 }
+//                node.anchorPoint = CGPoint(x: 0.5, y: 0.0);
                 
                 return node
             }

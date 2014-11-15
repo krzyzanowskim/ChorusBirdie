@@ -49,27 +49,12 @@ class FlyingBirdNode : SKEffectNode {
         }
     }
     
-    private func startAnimatingWings() {
-        let toTheRight = SKAction.rotateByAngle(0.5, duration: 0.2)
-        let toTheLeft = SKAction.rotateByAngle(-0.5, duration: 0.2)
-        let topSequence = SKAction.sequence([toTheRight, toTheLeft])
-        let bottomSequence = SKAction.sequence([toTheLeft, toTheRight])
-        
-        self.childNodeWithName("leftWing")?.runAction(SKAction.repeatActionForever(topSequence))
-        self.childNodeWithName("rightWing")?.runAction(SKAction.repeatActionForever(bottomSequence))
-    }
-    
-    private func stopAnimatingWings() {
-        self.childNodeWithName("leftWing")?.removeAllActions()
-        self.childNodeWithName("rightWing")?.removeAllActions()
-    }
-    
-    class func bird(mode: ModeEnum = .Flying, position: CGPoint = CGPoint(x:400,y:400)) -> FlyingBirdNode {
+    class func bird(mode: ModeEnum = .Flying, position: CGPoint = CGPoint(x:100,y:700)) -> FlyingBirdNode {
         let node = FlyingBirdNode()
         node.position = position
         node.mode    = mode
         let bodyNode = node.mode.body
-
+        
         if let texture = bodyNode.texture {
             node.physicsBody = SKPhysicsBody(texture: bodyNode.texture, size: bodyNode.size)
             node.physicsBody?.dynamic = true
@@ -85,9 +70,24 @@ class FlyingBirdNode : SKEffectNode {
         self.filter = greyFilter
         self.setupSprites()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    private func startAnimatingWings() {
+        let toTheRight = SKAction.rotateByAngle(0.5, duration: 0.2)
+        let toTheLeft = SKAction.rotateByAngle(-0.5, duration: 0.2)
+        let topSequence = SKAction.sequence([toTheRight, toTheLeft])
+        let bottomSequence = SKAction.sequence([toTheLeft, toTheRight])
+        
+        self.childNodeWithName("leftWing")?.runAction(SKAction.repeatActionForever(topSequence))
+        self.childNodeWithName("rightWing")?.runAction(SKAction.repeatActionForever(bottomSequence))
+    }
+    
+    private func stopAnimatingWings() {
+        self.childNodeWithName("leftWing")?.removeAllActions()
+        self.childNodeWithName("rightWing")?.removeAllActions()
     }
     
     func setupSprites() {
