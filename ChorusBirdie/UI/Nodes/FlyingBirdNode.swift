@@ -45,18 +45,18 @@ class FlyingBirdNode : SKSpriteNode {
         private var leftWingImageName:String {
             switch (self) {
             case .Flying:
-                return "flying-bird-wing-up"
+                return "flying-bird-wing-left"
             case .Sitting:
-                return "sitting-bird-wing-up"
+                return "sitting-bird-wing-left"
             }
         }
 
         private var rightWingImageName:String {
             switch (self) {
             case .Flying:
-                return "flying-bird-wing-down"
+                return "flying-bird-wing-right"
             case .Sitting:
-                return "sitting-bird-wing-down"
+                return "sitting-bird-wing-right"
             }
         }
 
@@ -65,6 +65,9 @@ class FlyingBirdNode : SKSpriteNode {
     var mode:ModeEnum = .Flying {
         didSet {
             self.texture = SKTexture(imageNamed: mode.bodyImageName)
+            if let size = self.texture?.size() {
+                self.size = size
+            }
         }
     }
     
@@ -89,7 +92,7 @@ class FlyingBirdNode : SKSpriteNode {
         super.init()
         
         self.color = UIColor.whiteColor()
-        self.texture = SKTexture(imageNamed: "flying-bird-body")
+        self.texture = SKTexture(imageNamed: mode.bodyImageName)
         if let size = self.texture?.size() {
             self.size = size
         }
