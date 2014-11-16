@@ -51,6 +51,7 @@ class FlyingBirdNode : SKEffectNode {
         node.position = position
         node.mode    = mode
         node.animated = animated
+        node.name    = "bird"
         let bodyNode = node.mode.body
         
         if let texture = bodyNode.texture {

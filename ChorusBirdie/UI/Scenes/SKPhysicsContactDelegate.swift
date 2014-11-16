@@ -18,9 +18,10 @@ extension GameScene {
             playChorus()
         } else if (contact.bodyA == birdNode.physicsBody && birdNode.mode != .Sitting) {
             let crashStarNode = SKSpriteNode(imageNamed: "crash")
+            crashStarNode.name = "crash"
             crashStarNode.position = contact.contactPoint
             self.addChild(crashStarNode)
-            gameOver = true
+            gameOver(true)
         }
     }
 

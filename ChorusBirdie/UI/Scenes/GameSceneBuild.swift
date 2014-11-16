@@ -18,15 +18,18 @@ extension GameScene {
             cable1.physicsBody = SKPhysicsBody(texture: cable1.texture, size: size)
         }
         cable1.physicsBody?.dynamic = false
-        self.addChild(cable1)
-        
+        if (cable1.parent == nil) {
+            self.addChild(cable1)
+        }
         
         cable2.position = CGPointMake(self.size.width / 2, 100);
         if let size = cable2.texture?.size() {
             cable2.physicsBody = SKPhysicsBody(texture: cable2.texture, size: size)
         }
         cable2.physicsBody?.dynamic = false
-        self.addChild(cable2)
+        if (cable2.parent == nil) {
+            self.addChild(cable2)
+        }
         
         let krakow = SKSpriteNode(imageNamed: "krakow")
         krakow.position = self.scene!.position
@@ -35,11 +38,12 @@ extension GameScene {
         self.addChild(krakow)
     }
     
+    
     func buildInitialScene() {
         // cable 1
         for idx in stride(from: 150, through: self.scene!.size.width, by: 140) {
-            let skip = arc4random_uniform(2) == 0
-            if (!skip) {
+            let skipNext = arc4random_uniform(2) == 0
+            if (!skipNext) {
                 let sittingBird = FlyingBirdNode.bird(mode: .Sitting, position: CGPoint(x:idx, y:700));
                 if let body = self.physicsWorld.bodyAlongRayStart(sittingBird.position, end: CGPoint(x:sittingBird.position.x, y:0)) {
                     if let node = body.node {
@@ -50,6 +54,7 @@ extension GameScene {
                 self.addChild(sittingBird)
             }
         }
+        
         // cable 2
         for idx in stride(from: 140, through: self.scene!.size.width, by: 170) {
             if let body = self.physicsWorld.bodyAlongRayStart(CGPoint(x:idx, y:100), end: CGPoint(x:idx, y:0)) {

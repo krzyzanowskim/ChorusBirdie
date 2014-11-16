@@ -15,6 +15,7 @@
 		319A41141A175F86005F33FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 319A41121A175F86005F33FC /* Main.storyboard */; };
 		319A41161A175F86005F33FC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 319A41151A175F86005F33FC /* Images.xcassets */; };
 		319A41191A175F86005F33FC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 319A41171A175F86005F33FC /* LaunchScreen.xib */; };
+		750D53821A18AA9C00D9ACFA /* SpriteButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750D53811A18AA9C00D9ACFA /* SpriteButtonNode.swift */; };
 		7545684A1A182947001C6ED7 /* GameSceneAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754568491A182947001C6ED7 /* GameSceneAudio.swift */; };
 		7545684C1A182C5A001C6ED7 /* chorus.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7545684B1A182C5A001C6ED7 /* chorus.mp3 */; };
 		7545684E1A183014001C6ED7 /* SKPhysicsContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7545684D1A183014001C6ED7 /* SKPhysicsContactDelegate.swift */; };
@@ -33,6 +34,7 @@
 		319A41131A175F86005F33FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		319A41151A175F86005F33FC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		319A41181A175F86005F33FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		750D53811A18AA9C00D9ACFA /* SpriteButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteButtonNode.swift; sourceTree = "<group>"; };
 		754568491A182947001C6ED7 /* GameSceneAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSceneAudio.swift; sourceTree = "<group>"; };
 		7545684B1A182C5A001C6ED7 /* chorus.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chorus.mp3; sourceTree = "<group>"; };
 		7545684D1A183014001C6ED7 /* SKPhysicsContactDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPhysicsContactDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				319A41121A175F86005F33FC /* Main.storyboard */,
 				319A41321A17618F005F33FC /* Scenes */,
 				319A41311A17614F005F33FC /* ViewControllers */,
+				750D53811A18AA9C00D9ACFA /* SpriteButtonNode.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				319A410F1A175F86005F33FC /* GameScene.swift in Sources */,
 				75996AFC1A17B21900E7D151 /* BirdMode.swift in Sources */,
 				319A41111A175F86005F33FC /* GameViewController.swift in Sources */,
+				750D53821A18AA9C00D9ACFA /* SpriteButtonNode.swift in Sources */,
 				319A410B1A175F86005F33FC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
