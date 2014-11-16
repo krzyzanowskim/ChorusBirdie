@@ -9,7 +9,9 @@
 import SpriteKit
 import AVFoundation
 
-class GameScene: SKScene {
+private let spriteLineCategory:UInt32 = 0x1 << 1;
+
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let birdNode = FlyingBirdNode.bird()
     let cable1 = SKSpriteNode(imageNamed: "cable1")
@@ -29,15 +31,24 @@ class GameScene: SKScene {
         return button
     }
     
-    override func didMoveToView(view: SKView) {
+    required override init(size: CGSize) {
+        super.init(size: size)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.physicsWorld.contactDelegate = self
         self.physicsWorld.gravity = CGVectorMake(0.0, -0.9)
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+    }
+    
+    override func didMoveToView(view: SKView) {
         self.addChild(birdNode)
 
         self.setupCables()
         self.buildInitialScene();
+
         self.addChild(button)
-        
         birdNode.physicsBody?.applyImpulse(CGVectorMake(10.0, 0.0))
     }
     
@@ -52,7 +63,7 @@ class GameScene: SKScene {
             } else {
                 // Can touch only when flying
                 if birdNode.mode == .Flying {
-                    birdNode.physicsBody?.applyImpulse(CGVectorMake(0.5, 10.0))
+                    birdNode.physicsBody?.applyImpulse(CGVectorMake(1.5, 10.0))
                 }
             }
         }

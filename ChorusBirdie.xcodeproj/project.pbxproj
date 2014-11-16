@@ -17,6 +17,7 @@
 		319A41191A175F86005F33FC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 319A41171A175F86005F33FC /* LaunchScreen.xib */; };
 		7545684A1A182947001C6ED7 /* GameSceneAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754568491A182947001C6ED7 /* GameSceneAudio.swift */; };
 		7545684C1A182C5A001C6ED7 /* chorus.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7545684B1A182C5A001C6ED7 /* chorus.mp3 */; };
+		7545684E1A183014001C6ED7 /* SKPhysicsContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7545684D1A183014001C6ED7 /* SKPhysicsContactDelegate.swift */; };
 		75996AFC1A17B21900E7D151 /* BirdMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75996AFB1A17B21900E7D151 /* BirdMode.swift */; };
 		75996AFE1A17B38000E7D151 /* GameSceneBuild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75996AFD1A17B38000E7D151 /* GameSceneBuild.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +35,7 @@
 		319A41181A175F86005F33FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		754568491A182947001C6ED7 /* GameSceneAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSceneAudio.swift; sourceTree = "<group>"; };
 		7545684B1A182C5A001C6ED7 /* chorus.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chorus.mp3; sourceTree = "<group>"; };
+		7545684D1A183014001C6ED7 /* SKPhysicsContactDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPhysicsContactDelegate.swift; sourceTree = "<group>"; };
 		75996AFB1A17B21900E7D151 /* BirdMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BirdMode.swift; sourceTree = "<group>"; };
 		75996AFD1A17B38000E7D151 /* GameSceneBuild.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSceneBuild.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +139,7 @@
 				319A410E1A175F86005F33FC /* GameScene.swift */,
 				75996AFD1A17B38000E7D151 /* GameSceneBuild.swift */,
 				754568491A182947001C6ED7 /* GameSceneAudio.swift */,
+				7545684D1A183014001C6ED7 /* SKPhysicsContactDelegate.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D8AE6461A177C97008EED59 /* FlyingBirdNode.swift in Sources */,
+				7545684E1A183014001C6ED7 /* SKPhysicsContactDelegate.swift in Sources */,
 				75996AFE1A17B38000E7D151 /* GameSceneBuild.swift in Sources */,
 				7545684A1A182947001C6ED7 /* GameSceneAudio.swift in Sources */,
 				319A410F1A175F86005F33FC /* GameScene.swift in Sources */,

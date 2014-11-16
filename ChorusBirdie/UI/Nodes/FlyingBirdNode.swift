@@ -9,6 +9,8 @@
 import UIKit
 import SpriteKit
 
+let spriteBirdCategory:UInt32 = 0x1 << 0;
+
 class FlyingBirdNode : SKEffectNode {
 
     var mode:ModeEnum = .Flying {
@@ -56,6 +58,8 @@ class FlyingBirdNode : SKEffectNode {
             node.physicsBody?.dynamic = true
             node.physicsBody?.mass = 0.1
             node.physicsBody?.allowsRotation = false
+            node.physicsBody?.categoryBitMask = spriteBirdCategory
+            node.physicsBody?.contactTestBitMask = spriteBirdCategory
         }
         return node
     }
@@ -113,5 +117,5 @@ class FlyingBirdNode : SKEffectNode {
         self.addChild(mode.leftWing)
         self.addChild(mode.righWing)
     }
-    
+        
 }
