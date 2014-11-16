@@ -8,11 +8,18 @@
 
 import UIKit
 import SpriteKit
+import AVFoundation
 
 let spriteBirdCategory:UInt32 = 0x1 << 0;
 
 class FlyingBirdNode : SKEffectNode {
 
+    var audioPlayer:AVAudioPlayer = {
+        var error:NSError?
+        let player = AVAudioPlayer(contentsOfURL: NSBundle.mainBundle().URLForResource("kwakwa", withExtension: "mp3"), error:&error)
+        return player
+    }()
+    
     var mode:ModeEnum = .Flying {
         didSet {
             self.setupSprites()
@@ -21,10 +28,13 @@ class FlyingBirdNode : SKEffectNode {
             case .Landing, .Sitting:
                 self.childNodeWithName("leftWing")?.zRotation = CGFloat(M_PI) / 2
                 self.childNodeWithName("rightWing")?.zRotation = CGFloat(M_PI) / 2
+                audioPlayer.stop()
                 break;
             case .Flying:
                 self.childNodeWithName("leftWing")?.zRotation = 0
                 self.childNodeWithName("rightWing")?.zRotation = 0
+                
+                playKwakKwak()
                 break;
             }
             
@@ -54,6 +64,15 @@ class FlyingBirdNode : SKEffectNode {
                 self.stopSwinging()
             }
         }
+    }
+    
+    
+    private var kwaTimer:NSTimer? = nil
+    func playKwakKwak() {
+        audioPlayer.play();
+        
+        kwaTimer?.invalidate()
+        kwaTimer = NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: Selector("playKwakKwak"), userInfo: nil, repeats: false)
     }
     
     class func bird(mode: ModeEnum = .Flying, animated:Bool = true, position: CGPoint = CGPoint(x:100,y:700)) -> FlyingBirdNode {
