@@ -97,8 +97,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (!_gameover) {
             if (birdNode.mode == .Flying) {
                 birdNode.mode = .Landing
-                birdNode.physicsBody?.applyImpulse(CGVectorMake(-2.5, 0.0))
-                birdNode.physicsBody?.velocity = CGVector(dx:0.05, dy:0.0)
+                birdNode.physicsBody?.velocity = CGVector(dx:0.0, dy:0.0)
+                birdNode.physicsBody?.applyImpulse(CGVector(dx: 0.05, dy: 0.0))
                 birdNode.physicsBody?.affectedByGravity = true
             }
         }
