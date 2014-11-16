@@ -46,6 +46,16 @@ class FlyingBirdNode : SKEffectNode {
         }
     }
     
+    var swinging:Bool = false {
+        didSet {
+            if swinging {
+                self.startSwinging()
+            } else {
+                self.stopSwinging()
+            }
+        }
+    }
+    
     class func bird(mode: ModeEnum = .Flying, animated:Bool = true, position: CGPoint = CGPoint(x:100,y:700)) -> FlyingBirdNode {
         let node = FlyingBirdNode()
         node.position = position
@@ -110,6 +120,26 @@ class FlyingBirdNode : SKEffectNode {
     private func stopAnimatingWings() {
         self.childNodeWithName("leftWing")?.removeAllActions()
         self.childNodeWithName("rightWing")?.removeAllActions()
+    }
+    
+    private func startSwinging() {
+        let firstAction = SKAction.rotateByAngle(0.25, duration: 0.25)
+        
+        let leftRotation = SKAction.rotateByAngle(-0.5, duration: 0.5)
+        let leftMove = SKAction.moveByX(self.mode.body.size.width / 2, y: 0, duration: 0.5)
+        let toTheLeft = SKAction.group([leftRotation, leftMove])
+        
+        let rightRotation = SKAction.rotateByAngle(0.5, duration: 0.5)
+        let rightMove = SKAction.moveByX(-self.mode.body.size.width / 2, y: 0, duration: 0.5)
+        let toTheRight = SKAction.group([rightRotation, rightMove])
+        
+        let sequence = SKAction.repeatActionForever(SKAction.sequence([toTheLeft, toTheRight]))
+        sequence.timingMode = SKActionTimingMode.EaseIn
+        self.runAction(SKAction.sequence([firstAction, sequence]))
+    }
+    
+    private func stopSwinging() {
+        
     }
     
     func setupSprites() {
