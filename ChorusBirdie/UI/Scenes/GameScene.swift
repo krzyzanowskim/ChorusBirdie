@@ -49,7 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.setupCables()
         self.buildInitialScene();
 
-        birdNode.physicsBody?.applyImpulse(CGVectorMake(10.0, 0.0))
+        birdNode.physicsBody?.applyImpulse(CGVectorMake(5.0, 3.0))
         
         let swipeUpGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("swipeUpGesture:"))
         swipeUpGestureRecognizer.direction = .Up
@@ -66,6 +66,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (!gameOver) {
             if (birdNode.mode == .Flying) {
                 birdNode.mode = .Landing
+                birdNode.physicsBody?.applyImpulse(CGVectorMake(-2.5, 0.0))
             }
         }
     }
