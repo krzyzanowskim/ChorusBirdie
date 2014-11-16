@@ -95,15 +95,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func initialSetup() {
         self.physicsWorld.gravity = CGVectorMake(0.0, -0.9)
+        self.addChild(birdNode)
+        birdNode.position = CGPoint(x:100,y:700)
+        birdNode.physicsBody?.applyForce(CGVectorMake(3.0, 15.0))
         
         self.setupCables()
         self.buildInitialScene();
         
-
-        self.addChild(birdNode)
-        birdNode.position = CGPoint(x:100,y:700)
-        birdNode.physicsBody?.applyForce(CGVectorMake(3.0, 15.0))
-
         let swipeUpGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("swipeUpGesture:"))
         swipeUpGestureRecognizer.direction = .Up
         self.view?.addGestureRecognizer(swipeUpGestureRecognizer)
