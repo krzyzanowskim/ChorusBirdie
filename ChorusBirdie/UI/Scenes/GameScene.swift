@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 class GameScene: SKScene {
     
@@ -15,7 +16,9 @@ class GameScene: SKScene {
     let cable2 = SKSpriteNode(imageNamed: "cable2")
     let cable3 = SKSpriteNode(imageNamed: "cable3")
     let cable4 = SKSpriteNode(imageNamed: "cable4")
-
+    
+    var audioPlayer:AVAudioPlayer?
+    
     var button:SKLabelNode {
         let button = SKLabelNode(text: "LAND")
         button.name = "button"

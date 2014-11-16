@@ -9,7 +9,6 @@
 import UIKit
 import SpriteKit
 
-
 class FlyingBirdNode : SKEffectNode {
 
     var mode:ModeEnum = .Flying {
