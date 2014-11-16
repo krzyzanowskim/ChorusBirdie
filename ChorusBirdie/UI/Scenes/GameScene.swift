@@ -20,6 +20,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let cable4 = SKSpriteNode(imageNamed: "cable4")
     
     var audioPlayer:AVAudioPlayer?
+    var gameOver:Bool = false {
+        didSet {
+            self.childNodeWithName("button")?.removeFromParent()
+            let label = SKLabelNode(text: "Game Over")
+            label.fontColor = UIColor.redColor()
+            label.fontSize = 80
+            label.horizontalAlignmentMode = .Center
+            label.position = CGPointMake(self.scene!.size.width / 2, (self.scene!.size.height / 3) * 2)
+            label.zPosition = 5.0;
+            self.addChild(label)
+        }
+    }
     
     var button:SKLabelNode {
         let button = SKLabelNode(text: "LAND")
@@ -62,7 +74,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 node.removeFromParent()
             } else {
                 // Can touch only when flying
-                if birdNode.mode == .Flying {
+                if !gameOver && birdNode.mode == .Flying {
                     birdNode.physicsBody?.applyImpulse(CGVectorMake(1.5, 10.0))
                 }
             }
