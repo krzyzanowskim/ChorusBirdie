@@ -64,6 +64,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.enumerateChildNodesWithName("crash", usingBlock: { (crash:SKNode!, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
             crash.removeFromParent()
         })
+        self.enumerateChildNodesWithName("krakow", usingBlock: { (krakow:SKNode!, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
+            krakow.removeFromParent()
+        })
+        self.enumerateChildNodesWithName("cable", usingBlock: { (cable:SKNode!, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
+            cable.removeFromParent()
+        })
+
     }
     
     func initialSetup() {

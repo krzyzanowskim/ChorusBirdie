@@ -13,6 +13,7 @@ extension GameScene {
     
     func setupCables() {
         cable1.position = CGPointMake(self.size.width / 2, 250);
+        cable1.name = "cable"
         
         if let size = cable1.texture?.size() {
             cable1.physicsBody = SKPhysicsBody(texture: cable1.texture, size: size)
@@ -23,6 +24,8 @@ extension GameScene {
         }
         
         cable2.position = CGPointMake(self.size.width / 2, 100);
+        cable2.name = "cable"
+
         if let size = cable2.texture?.size() {
             cable2.physicsBody = SKPhysicsBody(texture: cable2.texture, size: size)
         }
@@ -32,6 +35,7 @@ extension GameScene {
         }
         
         let krakow = SKSpriteNode(imageNamed: "krakow")
+        krakow.name = "krakow"
         krakow.position = self.scene!.position
         krakow.size = self.size
         krakow.zPosition = -1
