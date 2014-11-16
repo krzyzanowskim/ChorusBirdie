@@ -60,7 +60,7 @@ extension GameScene {
         }
         
         // cable 2
-        for idx in stride(from: 140, through: self.scene!.size.width, by: 170) {
+        for idx in stride(from: 150, through: self.scene!.size.width, by: 170) {
             if let body = self.physicsWorld.bodyAlongRayStart(CGPoint(x:idx, y:100), end: CGPoint(x:idx, y:0)) {
                 if let node = body.node {
                     let sittingBird = FlyingBirdNode.bird(mode: .Sitting, position: CGPoint(x:idx, y:150));
