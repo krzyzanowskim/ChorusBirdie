@@ -49,10 +49,11 @@ class FlyingBirdNode : SKEffectNode {
         }
     }
     
-    class func bird(mode: ModeEnum = .Flying, position: CGPoint = CGPoint(x:100,y:700)) -> FlyingBirdNode {
+    class func bird(mode: ModeEnum = .Flying, animated:Bool = true, position: CGPoint = CGPoint(x:100,y:700)) -> FlyingBirdNode {
         let node = FlyingBirdNode()
         node.position = position
         node.mode    = mode
+        node.animated = animated
         let bodyNode = node.mode.body
         
         if let texture = bodyNode.texture {
@@ -76,8 +77,29 @@ class FlyingBirdNode : SKEffectNode {
     }
     
     private func startAnimatingWings() {
-        let toTheRight = SKAction.rotateByAngle(0.5, duration: 0.2)
-        let toTheLeft = SKAction.rotateByAngle(-0.5, duration: 0.2)
+        
+        var durationLeft:CGFloat
+        var durationRight:CGFloat
+        var rotateAngleLeft:CGFloat
+        var rotateAngleRight:CGFloat
+        
+        switch (self.mode) {
+        case .Flying:
+            rotateAngleLeft = 0.5
+            rotateAngleRight = 0.5
+            durationLeft = 0.2 + CGFloat(arc4random_uniform(10)) / 100.0
+            durationRight = 0.2 + CGFloat(arc4random_uniform(10)) / 100.0
+            break;
+        default:
+            rotateAngleLeft = 0.1 + CGFloat(arc4random_uniform(1)) / 100.0
+            rotateAngleRight = 0.1 + CGFloat(arc4random_uniform(1)) / 100.0
+            durationLeft = 0.05 + CGFloat(arc4random_uniform(10)) / 100.0
+            durationRight = 0.05 + CGFloat(arc4random_uniform(10)) / 100.0
+            break
+        }
+        
+        let toTheRight = SKAction.rotateByAngle(rotateAngleLeft, duration: Double(durationLeft))
+        let toTheLeft = SKAction.rotateByAngle(-rotateAngleRight, duration: Double(durationRight))
         let topSequence = SKAction.sequence([toTheRight, toTheLeft])
         let bottomSequence = SKAction.sequence([toTheLeft, toTheRight])
         

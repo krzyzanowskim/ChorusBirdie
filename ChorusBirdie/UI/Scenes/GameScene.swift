@@ -36,7 +36,6 @@ class GameScene: SKScene {
         self.addChild(button)
         
         birdNode.physicsBody?.applyImpulse(CGVectorMake(10.0, 0.0))
-        birdNode.animated = true        
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
