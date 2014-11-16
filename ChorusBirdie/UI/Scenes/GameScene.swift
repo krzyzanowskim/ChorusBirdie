@@ -8,6 +8,7 @@
 
 import SpriteKit
 import AVFoundation
+import CoreMotion
 
 private let spriteLineCategory:UInt32 = 0x1 << 1;
 
@@ -16,6 +17,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let birdNode = FlyingBirdNode.bird()
     let cable1 = SKSpriteNode(imageNamed: "cable1")
     let cable2 = SKSpriteNode(imageNamed: "cable2")
+    var motionManager:CMMotionManager = {
+        let mgr = CMMotionManager()
+        mgr.deviceMotionUpdateInterval = 2.0 / 60.0;
+        return mgr
+    }()
 
     var audioPlayer:AVAudioPlayer?
     
@@ -44,13 +50,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     required override init(size: CGSize) {
         super.init(size: size)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.physicsWorld.contactDelegate = self
-        self.physicsWorld.gravity = CGVectorMake(0.0, -0.9)
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+        
+        motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue(), withHandler: { [unowned self] (motion:CMDeviceMotion!, error:NSError!) -> Void in
+            let x = motion.gravity.x
+            let y = motion.gravity.y
+            let angle = atan2(y, x) + M_PI_2;
+            // 1.57 is new 0
+            let tilt = CGFloat(1.57 - angle)
+            if self.birdNode.mode == .Landing {
+                self.birdNode.physicsBody?.applyImpulse(CGVector(dx: -tilt, dy: 0.0))
+                let rotateAction = SKAction.rotateToAngle(tilt, duration: NSTimeInterval(0.1))
+                self.birdNode.runAction(rotateAction)
+                //SKAction.rotateByAngle(rotateAngleLeft, duration: Double(durationLeft))
+            }
+        })
     }
     
     override func didMoveToView(view: SKView) {
@@ -74,14 +94,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func initialSetup() {
-        birdNode.position = CGPoint(x:100,y:700)
-        self.addChild(birdNode)
+        self.physicsWorld.gravity = CGVectorMake(0.0, -0.9)
         
         self.setupCables()
         self.buildInitialScene();
         
-        birdNode.physicsBody?.applyImpulse(CGVectorMake(5.0, 3.0))
-        
+
+        self.addChild(birdNode)
+        birdNode.position = CGPoint(x:100,y:700)
+        birdNode.physicsBody?.applyForce(CGVectorMake(3.0, 15.0))
+
         let swipeUpGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("swipeUpGesture:"))
         swipeUpGestureRecognizer.direction = .Up
         self.view?.addGestureRecognizer(swipeUpGestureRecognizer)
@@ -97,9 +119,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (!_gameover) {
             if (birdNode.mode == .Flying) {
                 birdNode.mode = .Landing
-                birdNode.physicsBody?.velocity = CGVector(dx:0.0, dy:0.0)
-                birdNode.physicsBody?.applyImpulse(CGVector(dx: 0.05, dy: 0.0))
                 birdNode.physicsBody?.affectedByGravity = true
+//                birdNode.scene?.physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.2)
+                birdNode.physicsBody?.velocity = CGVector(dx:0.0, dy:0.0)
             }
         }
     }
@@ -107,7 +129,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func swipeUpGesture(recognizer: UIGestureRecognizer) {
         if (!_gameover) {
             if (birdNode.mode == .Flying) {
-                birdNode.physicsBody?.applyImpulse(CGVectorMake(1.5, 20.0))
+                birdNode.physicsBody?.applyImpulse(CGVectorMake(2.5, 20.0))
             }
         }
     }
