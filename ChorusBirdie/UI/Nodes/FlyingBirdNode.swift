@@ -92,8 +92,8 @@ class FlyingBirdNode : SKEffectNode {
         default:
             rotateAngleLeft = 0.1 + CGFloat(arc4random_uniform(1)) / 100.0
             rotateAngleRight = 0.1 + CGFloat(arc4random_uniform(1)) / 100.0
-            durationLeft = 0.05 + CGFloat(arc4random_uniform(10)) / 100.0
-            durationRight = 0.05 + CGFloat(arc4random_uniform(10)) / 100.0
+            durationLeft = 0.5 + CGFloat(arc4random_uniform(10)) / 100.0
+            durationRight = 0.5 + CGFloat(arc4random_uniform(10)) / 100.0
             break
         }
         
