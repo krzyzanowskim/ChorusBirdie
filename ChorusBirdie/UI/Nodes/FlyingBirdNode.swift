@@ -27,10 +27,6 @@ class FlyingBirdNode : SKEffectNode {
             }
             
             self.shouldEnableEffects = mode == .Sitting
-            
-            if animated {
-                self.startAnimatingWings()
-            }
         }
     }
     

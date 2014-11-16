@@ -42,8 +42,6 @@ class GameScene: SKScene {
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        /* Called when a touch begins */
-        
         if let touch = touches.anyObject() as? UITouch {
             let location = touch.locationInNode(self)
             let node = self .nodeAtPoint(location)
@@ -52,7 +50,10 @@ class GameScene: SKScene {
                 birdNode.mode = .Landing
                 node.removeFromParent()
             } else {
-                birdNode.physicsBody?.applyImpulse(CGVectorMake(0.5, 10.0))
+                // Can touch only when flying
+                if birdNode.mode == .Flying {
+                    birdNode.physicsBody?.applyImpulse(CGVectorMake(0.5, 10.0))
+                }
             }
         }
     }
