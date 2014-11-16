@@ -16,19 +16,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let birdNode = FlyingBirdNode.bird()
     let cable1 = SKSpriteNode(imageNamed: "cable1")
     let cable2 = SKSpriteNode(imageNamed: "cable2")
-    let cable3 = SKSpriteNode(imageNamed: "cable3")
-    let cable4 = SKSpriteNode(imageNamed: "cable4")
     
     var audioPlayer:AVAudioPlayer?
+    var gameOverButton:SKLabelNode {
+        let label = SKLabelNode(text: "Game Over")
+        label.name = "GameOverButton"
+        label.fontColor = UIColor.redColor()
+        label.fontSize = 80
+        label.horizontalAlignmentMode = .Center
+        label.position = CGPointMake(self.scene!.size.width / 2, (self.scene!.size.height / 3) * 2)
+        label.zPosition = 5.0;
+        return label
+    }
+    
     var gameOver:Bool = false {
         didSet {
-            let label = SKLabelNode(text: "Game Over")
-            label.fontColor = UIColor.redColor()
-            label.fontSize = 80
-            label.horizontalAlignmentMode = .Center
-            label.position = CGPointMake(self.scene!.size.width / 2, (self.scene!.size.height / 3) * 2)
-            label.zPosition = 5.0;
-            self.addChild(label)
+            if (gameOver) {
+                self.addChild(gameOverButton)
+            } else {
+                self.childNodeWithName("GameOverButton")?.removeFromParent()
+            }
         }
     }
     
@@ -78,14 +85,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-    
-//    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-//        if let touch = touches.anyObject() as? UITouch {
-//            let location = touch.locationInNode(self)
-//            let node = self.nodeAtPoint(location)
-//        }
-//    }
-   
+       
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }
