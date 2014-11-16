@@ -22,7 +22,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var audioPlayer:AVAudioPlayer?
     var gameOver:Bool = false {
         didSet {
-            self.childNodeWithName("button")?.removeFromParent()
             let label = SKLabelNode(text: "Game Over")
             label.fontColor = UIColor.redColor()
             label.fontSize = 80
@@ -31,16 +30,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             label.zPosition = 5.0;
             self.addChild(label)
         }
-    }
-    
-    var button:SKLabelNode {
-        let button = SKLabelNode(text: "LAND")
-        button.name = "button"
-        button.fontColor = UIColor.redColor()
-        button.fontSize = 80
-        button.position = CGPointMake(100, 100)
-        button.zPosition = 1.0;
-        return button
     }
     
     required override init(size: CGSize) {
@@ -60,26 +49,41 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.setupCables()
         self.buildInitialScene();
 
-        self.addChild(button)
         birdNode.physicsBody?.applyImpulse(CGVectorMake(10.0, 0.0))
+        
+        let swipeUpGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("swipeUpGesture:"))
+        swipeUpGestureRecognizer.direction = .Up
+        self.view?.addGestureRecognizer(swipeUpGestureRecognizer)
+
+        let swipeDownGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("swipeDownGesture:"))
+        swipeDownGestureRecognizer.direction = .Down
+        self.view?.addGestureRecognizer(swipeDownGestureRecognizer)
+
+        swipeUpGestureRecognizer.requireGestureRecognizerToFail(swipeDownGestureRecognizer)
     }
-    
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        if let touch = touches.anyObject() as? UITouch {
-            let location = touch.locationInNode(self)
-            let node = self .nodeAtPoint(location)
-            
-            if node.name == "button" {
+
+    func swipeDownGesture(recognizer: UIGestureRecognizer) {
+        if (!gameOver) {
+            if (birdNode.mode == .Flying) {
                 birdNode.mode = .Landing
-                node.removeFromParent()
-            } else {
-                // Can touch only when flying
-                if !gameOver && birdNode.mode == .Flying {
-                    birdNode.physicsBody?.applyImpulse(CGVectorMake(1.5, 10.0))
-                }
             }
         }
     }
+
+    func swipeUpGesture(recognizer: UIGestureRecognizer) {
+        if (!gameOver) {
+            if (birdNode.mode == .Flying) {
+                birdNode.physicsBody?.applyImpulse(CGVectorMake(1.5, 20.0))
+            }
+        }
+    }
+    
+//    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+//        if let touch = touches.anyObject() as? UITouch {
+//            let location = touch.locationInNode(self)
+//            let node = self.nodeAtPoint(location)
+//        }
+//    }
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */

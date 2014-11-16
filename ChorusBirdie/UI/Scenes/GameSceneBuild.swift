@@ -38,6 +38,12 @@ extension GameScene {
         self.addChild(cable2)
         self.addChild(cable3)
         self.addChild(cable4)
+        
+        let krakow = SKSpriteNode(imageNamed: "krakow")
+        krakow.position = self.scene!.position
+        krakow.size = self.size
+        krakow.zPosition = -1
+        self.addChild(krakow)
     }
     
     func buildInitialScene() {
