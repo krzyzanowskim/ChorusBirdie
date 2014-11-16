@@ -118,7 +118,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if (birdNode.mode == .Flying) {
                 birdNode.mode = .Landing
                 birdNode.physicsBody?.affectedByGravity = true
-//                birdNode.scene?.physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.2)
+                birdNode.scene?.physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.2)
                 birdNode.physicsBody?.velocity = CGVector(dx:0.0, dy:0.0)
             }
         }
