@@ -64,6 +64,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.enumerateChildNodesWithName("crash", usingBlock: { (crash:SKNode!, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
             crash.removeFromParent()
         })
+        self.enumerateChildNodesWithName("krakow", usingBlock: { (krakow:SKNode!, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
+            krakow.removeFromParent()
+        })
+        self.enumerateChildNodesWithName("cable", usingBlock: { (cable:SKNode!, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
+            cable.removeFromParent()
+        })
+
     }
     
     func initialSetup() {
@@ -90,7 +97,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (!_gameover) {
             if (birdNode.mode == .Flying) {
                 birdNode.mode = .Landing
-                birdNode.physicsBody?.applyImpulse(CGVectorMake(-2.5, 0.0))
+                birdNode.physicsBody?.velocity = CGVector(dx:0.0, dy:0.0)
+                birdNode.physicsBody?.applyImpulse(CGVector(dx: 0.05, dy: 0.0))
+                birdNode.physicsBody?.affectedByGravity = true
             }
         }
     }
