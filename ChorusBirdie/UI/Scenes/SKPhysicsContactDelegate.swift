@@ -15,6 +15,12 @@ extension GameScene {
         if (contact.bodyA == birdNode.physicsBody && contact.bodyB == self.cable1.physicsBody && birdNode.mode == .Landing) {
             birdNode.mode = .Sitting
             
+            enumerateChildNodesWithName("bird", usingBlock: { (node, stop) -> Void in
+                if let bird = node as? FlyingBirdNode {
+                    bird.swinging = true
+                }
+            })
+            
             playChorus()
         } else if (contact.bodyA == birdNode.physicsBody && birdNode.mode != .Sitting) {
             let crashStarNode = SKSpriteNode(imageNamed: "crash")
