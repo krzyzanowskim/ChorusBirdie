@@ -57,13 +57,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
 
     self.motionManager.startDeviceMotionUpdates(to: .main) { (motion, error) in
-      guard let motion = motion else { return }
+      guard let motion = motion else {
+        return
+      }
       let x = motion.gravity.x
       let y = motion.gravity.y
       let angle = atan2(y, x) + (.pi / 2)
       // 1.57 is new 0
       let tilt = CGFloat(1.57 - angle)
-      if self.birdNode.mode == .Landing {
+      if self.birdNode.mode == .landing {
         self.birdNode.physicsBody?.applyImpulse(CGVector(dx: -tilt, dy: 0.0))
         let rotateAction = SKAction.rotate(toAngle: tilt, duration: 0.1)
         self.birdNode.run(rotateAction)
@@ -100,11 +102,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     setupCables()
     buildInitialScene()
 
-    let swipeUpGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeUpGesture))
+    let swipeUpGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeUpGesture))
     swipeUpGestureRecognizer.direction = .up
     view?.addGestureRecognizer(swipeUpGestureRecognizer)
 
-    let swipeDownGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeDownGesture))
+    let swipeDownGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeDownGesture))
     swipeDownGestureRecognizer.direction = .down
     view?.addGestureRecognizer(swipeDownGestureRecognizer)
 
@@ -113,8 +115,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
   @objc func swipeDownGesture(recognizer _: UIGestureRecognizer) {
     if !self._gameover {
-      if self.birdNode.mode == .Flying {
-        self.birdNode.mode = .Landing
+      if self.birdNode.mode == .flying {
+        self.birdNode.mode = .landing
         self.birdNode.physicsBody?.affectedByGravity = true
         self.birdNode.scene?.physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.2)
         self.birdNode.physicsBody?.velocity = CGVector(dx: 0.0, dy: 0.0)
@@ -124,7 +126,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
   @objc func swipeUpGesture(recognizer _: UIGestureRecognizer) {
     if !self._gameover {
-      if self.birdNode.mode == .Flying {
+      if self.birdNode.mode == .flying {
         self.birdNode.physicsBody?.applyImpulse(CGVector(dx: 2.5, dy: 20.0))
       }
     }

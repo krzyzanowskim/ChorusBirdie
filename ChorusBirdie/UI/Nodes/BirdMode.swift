@@ -11,7 +11,7 @@ import SpriteKit
 
 extension FlyingBirdNode {
   enum ModeEnum {
-    case Flying, Landing, Sitting
+    case flying, landing, sitting
 
     var leftWing: SKSpriteNode {
       let node = SKSpriteNode(texture: SKTexture(imageNamed: leftWingImageName))
@@ -41,45 +41,45 @@ extension FlyingBirdNode {
 
     private var leftWingAnchorPoint: CGPoint {
       switch self {
-        case .Flying:
+        case .flying:
           return CGPoint(x: 0, y: 0)
-        case .Landing, .Sitting:
+        case .landing, .sitting:
           return CGPoint(x: 1, y: 1)
       }
     }
 
     private var rightWingAnchorPoint: CGPoint {
       switch self {
-        case .Flying:
+        case .flying:
           return CGPoint(x: 1, y: 1)
-        case .Landing, .Sitting:
+        case .landing, .sitting:
           return CGPoint(x: 1, y: 0)
       }
     }
 
     private var bodyImageName: String {
       switch self {
-        case .Flying:
+        case .flying:
           return "flying-bird-body"
-        case .Landing, .Sitting:
+        case .landing, .sitting:
           return "sitting-bird-body"
       }
     }
 
     private var leftWingImageName: String {
       switch self {
-        case .Flying:
+        case .flying:
           return "flying-bird-wing-left"
-        case .Landing, .Sitting:
+        case .landing, .sitting:
           return "sitting-bird-wing-left"
       }
     }
 
     private var rightWingImageName: String {
       switch self {
-        case .Flying:
+        case .flying:
           return "flying-bird-wing-right"
-        case .Landing, .Sitting:
+        case .landing, .sitting:
           return "sitting-bird-wing-right"
       }
     }

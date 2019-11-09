@@ -11,8 +11,8 @@ import UIKit
 
 extension GameScene {
   func didBeginContact(contact: SKPhysicsContact) {
-    if contact.bodyA == birdNode.physicsBody, contact.bodyB == cable1.physicsBody, birdNode.mode == .Landing {
-      birdNode.mode = .Sitting
+    if contact.bodyA == birdNode.physicsBody, contact.bodyB == cable1.physicsBody, birdNode.mode == .landing {
+      birdNode.mode = .sitting
 
       enumerateChildNodes(withName: "bird", using: { (node, _) -> Void in
         if let bird = node as? FlyingBirdNode {
@@ -21,7 +21,7 @@ extension GameScene {
       })
 
       playChorus()
-    } else if contact.bodyA == birdNode.physicsBody, birdNode.mode != .Sitting {
+    } else if contact.bodyA == birdNode.physicsBody, birdNode.mode != .sitting {
       let crashStarNode = SKSpriteNode(imageNamed: "crash")
       crashStarNode.name = "crash"
       crashStarNode.position = contact.contactPoint

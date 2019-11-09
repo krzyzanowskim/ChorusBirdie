@@ -46,7 +46,7 @@ extension GameScene {
     for idx in stride(from: 150, through: scene!.size.width, by: 140) {
       let skipNext = arc4random_uniform(2) == 0
       if !skipNext {
-        let sittingBird = FlyingBirdNode.bird(mode: .Sitting, position: CGPoint(x: idx, y: 700))
+        let sittingBird = FlyingBirdNode.bird(mode: .sitting, position: CGPoint(x: idx, y: 700))
         if let body = self.physicsWorld.body(alongRayStart: sittingBird.position, end: CGPoint(x: sittingBird.position.x, y: 0)) {
           if let node = body.node {
             let size = node.calculateAccumulatedFrame()
@@ -61,7 +61,7 @@ extension GameScene {
     for idx in stride(from: 150, through: scene!.size.width, by: 170) {
       if let body = self.physicsWorld.body(alongRayStart: CGPoint(x: idx, y: 100), end: CGPoint(x: idx, y: 0)) {
         if let node = body.node {
-          let sittingBird = FlyingBirdNode.bird(mode: .Sitting, position: CGPoint(x: idx, y: 150))
+          let sittingBird = FlyingBirdNode.bird(mode: .sitting, position: CGPoint(x: idx, y: 150))
           _ = node.calculateAccumulatedFrame()
           addChild(sittingBird)
         }

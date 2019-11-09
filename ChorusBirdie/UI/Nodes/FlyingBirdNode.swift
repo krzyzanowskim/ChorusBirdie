@@ -18,28 +18,28 @@ class FlyingBirdNode: SKEffectNode {
     return player
   }()
 
-  var mode: ModeEnum = .Flying {
+  var mode: ModeEnum = .flying {
     didSet {
       self.setupSprites()
 
       switch self.mode {
-        case .Landing, .Sitting:
+        case .landing, .sitting:
           childNode(withName: "leftWing")?.zRotation = .pi / 2
           childNode(withName: "rightWing")?.zRotation = .pi / 2
           self.audioPlayer.stop()
-        case .Flying:
+        case .flying:
           childNode(withName: "leftWing")?.zRotation = 0
           childNode(withName: "rightWing")?.zRotation = 0
 
           self.playKwakKwak()
       }
 
-      shouldEnableEffects = self.mode == .Sitting
+      shouldEnableEffects = self.mode == .sitting
     }
   }
 
   var greyFilter: CIFilter {
-    return CIFilter(name: "CIColorControls", parameters: ["inputBrightness": 0.0, "inputSaturation": 0.0])!
+    CIFilter(name: "CIColorControls", parameters: ["inputBrightness": 0.0, "inputSaturation": 0.0])!
   }
 
   var animated: Bool = false {
@@ -71,7 +71,7 @@ class FlyingBirdNode: SKEffectNode {
     self.kwaTimer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(self.playKwakKwak), userInfo: nil, repeats: false)
   }
 
-  class func bird(mode: ModeEnum = .Flying, animated: Bool = true, position: CGPoint = CGPoint(x: 100, y: 700)) -> FlyingBirdNode {
+  class func bird(mode: ModeEnum = .flying, animated: Bool = true, position: CGPoint = CGPoint(x: 100, y: 700)) -> FlyingBirdNode {
     let node = FlyingBirdNode()
     node.position = position
     node.mode = mode
@@ -108,7 +108,7 @@ class FlyingBirdNode: SKEffectNode {
     var rotateAngleRight: CGFloat
 
     switch self.mode {
-      case .Flying:
+      case .flying:
         rotateAngleLeft = 0.5
         rotateAngleRight = 0.5
         durationLeft = 0.2 + CGFloat(arc4random_uniform(10)) / 100.0
