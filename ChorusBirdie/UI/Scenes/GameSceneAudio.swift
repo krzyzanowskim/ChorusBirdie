@@ -6,21 +6,18 @@
 //  Copyright (c) 2014 SwiftCrunch. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
+import Foundation
 
 extension GameScene {
-    
-    
-    func playChorus() {
-        if let url = NSBundle.mainBundle().URLForResource("chorus", withExtension: "mp3") {
-            var error:NSError?
-            audioPlayer = AVAudioPlayer(contentsOfURL: url, error: &error)
-            if let audioPlayer = audioPlayer {
-                audioPlayer.play()
-            } else {
-                println(error)
-            }
-        }
+  func playChorus() {
+    if let url = Bundle.main.url(forResource: "chorus", withExtension: "mp3") {
+      do {
+        let audioPlayer = try AVAudioPlayer(contentsOf: url)
+        audioPlayer.play()
+      } catch {
+        print(error)
+      }
     }
+  }
 }

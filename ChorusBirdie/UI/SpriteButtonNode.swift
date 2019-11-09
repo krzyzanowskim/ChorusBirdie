@@ -6,24 +6,23 @@
 //  Copyright (c) 2014 SwiftCrunch. All rights reserved.
 //
 
-import UIKit
 import SpriteKit
+import UIKit
 
-class SpriteButtonNode : SKLabelNode {
-    
-    var onPressed:(() -> ())?
+class SpriteButtonNode: SKLabelNode {
+  var onPressed: (() -> Void)?
 
-    override init() {
-        super.init()
+  override init() {
+    super.init()
+  }
+
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+  }
+
+  override func touchesBegan(_: Set<UITouch>, with _: UIEvent?) {
+    if let onPressed = onPressed {
+      onPressed()
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        if let onPressed = onPressed {
-            onPressed()
-        }
-    }
+  }
 }
